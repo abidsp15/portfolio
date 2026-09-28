@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('education_images', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('education_id')->constrained('education')->cascadeOnDelete();
+            $table->string('image_path');
+            $table->timestamps();
+        });
+
+        Schema::create('experience_images', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('experience_id')->constrained('experiences')->cascadeOnDelete();
+            $table->string('image_path');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('experience_images');
+        Schema::dropIfExists('education_images');
+    }
+};
